@@ -1,3 +1,4 @@
+from sqlite3 import Cursor
 import mariadb as db
 import dbcreds as c
 
@@ -29,3 +30,41 @@ def disconnect_db(conn, cursor):
         conn.close()
     except Exception:
         print("DB Connection Close Error: General error message")
+
+
+# get request from db
+def get_blog_db():
+    conn, cursor = connect_db()
+    blogs = None
+    status_code = 400
+
+    try:
+        cursor.execute("select id, content, username, created_at from post")
+        blogs = cursor.fetchall()
+
+        status_code = 200
+    except:
+        print('GET db error')
+
+    disconnect_db(conn, cursor)
+
+    return blogs, status_code
+
+# post request from db
+def post_blog_db(username, content):
+    conn, cursor = connect_db()
+    status_message = "Post db error"
+    status_code = 400
+
+    try:
+        cursor.execute("insert into post (content, username) values (?,?)", [content, username])
+        conn.commit()
+
+        status_message = 'post success message'
+        status_code = 200
+    except:
+        print('POST db error')
+
+    disconnect_db(conn, cursor)
+
+    return status_message, status_code
