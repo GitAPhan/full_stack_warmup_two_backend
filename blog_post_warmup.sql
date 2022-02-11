@@ -28,7 +28,7 @@ CREATE TABLE `post` (
   `username` varchar(100) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,'this is content','test_user','2022-02-10 17:00:51'),(2,'this is content','test_user','2022-02-10 17:00:51'),(3,'this is content','test_user','2022-02-10 17:01:01'),(4,'content content content content content content content content content content content content content content ','test_user2','2022-02-10 17:03:32'),(5,'content content content content content content content content content content content content content content ','test_user2','2022-02-10 17:03:32'),(6,'post post post content','newUser','2022-02-10 17:07:31');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-10 16:38:35
+-- Dump completed on 2022-02-10 18:02:10
