@@ -55,14 +55,23 @@ def post_blog_db(username, content):
     conn, cursor = connect_db()
     status_message = "Post db error"
     status_code = 400
+    user_id = None
 
     try:
         cursor.execute("insert into post (content, username) values (?,?)", [content, username])
         conn.commit()
 
-        status_message = 'post success message'
+        user_id = cursor.lastrowid
+        cursor.execute("select created_at from post where id=?", [user_id])
+        created_at = cursor.fetchone()[0]
+
+        status_message = {
+            "message": 'post success message',
+            "id": user_id,
+            "created_at": created_at
+        }
         status_code = 200
-    except:
+    except KeyError:
         print('POST db error')
 
     disconnect_db(conn, cursor)

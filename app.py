@@ -14,7 +14,9 @@ def post_blog():
 
     post_status_message, post_status_code = db.post_blog_db(username, content)
 
-    return Response(post_status_message, mimetype="plain/text", status=post_status_code)
+    post_status_message_json = json.dumps(post_status_message, default=str)
+
+    return Response(post_status_message_json, mimetype="plain/text", status=post_status_code)
 
 # get request
 @app.get('/blog')
