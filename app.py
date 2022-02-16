@@ -44,6 +44,10 @@ if mode == "testing":
     CORS(app)
     print("running in testing mode")
     app.run(debug=True)
+elif mode == "production":
+    print("running in production mode")
+    import bjoern # type: ignore
+    bjoern.run(app, "0.0.0.0", 5005)
 else:
     print("Invalid mode: Please run using either 'testing' or 'production'")
     exit()
